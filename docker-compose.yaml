@@ -1,0 +1,58 @@
+version: '3'
+services:
+  ### PHP-FPM Container
+  php-fpm:
+    build: ./build/php-fpm
+    volumes:
+      - ./src:/var/www
+    expose:
+      - "9000"
+    links:
+      - mysql
+    networks:
+      kibana:
+        ipv4_address: 172.21.0.6
+  
+  ### NGINX Container
+  nginx:
+    build: ./build/nginx
+    volumes:
+      - ./logs/nginx/:/var/log/nginx
+      - ./src:/var/www
+    ports:
+      - "81:80"
+      - "444:443"
+    links:
+      - php-fpm
+    networks:
+      kibana:
+        ipv4_address: 172.21.0.2
+
+  ### Application Code Container
+  application:
+    build: ./build/application
+    networks:
+      kibana:
+        ipv4_address: 172.21.0.4
+
+  ### Workspace Utilities Container
+  workspace:
+    build: ./build/workspace
+    volumes:
+      - ./src:/var/www
+    links:
+      - mysql
+    tty: true
+    networks:
+      kibana:
+        ipv4_address: 172.21.0.5
+
+volumes:
+  src:
+
+networks:
+  kibana:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
