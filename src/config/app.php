@@ -100,12 +100,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Predefined Roles Configuration
+    | Predefined Players Configuration
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the roles of users for projects
+    | Here you may configure players 
+    | Second player will be a bot
     |
     */
-    'roles' => array('member'=>'member', 'creator' => 'creator'),
+    'players' => array('X', 'O'),
 
 ];
