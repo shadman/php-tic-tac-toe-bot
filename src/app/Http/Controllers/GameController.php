@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use App\Facade\GameFacade;
 use App\Validators\GameValidator;
 
-
-class GameController extends Controller
+class GameController extends Controller 
 {
 
     /**
@@ -23,7 +22,7 @@ class GameController extends Controller
 
         $validator = GameValidator::move($parameters);
         if (!$validator->fails()) {
-            return GameFacade::move($parameters);
+            return GameFacade::makeMove($boardState, $playerUnit);
         }
 
         // Bad Request response

@@ -3,13 +3,12 @@
 namespace App\Facade;
 
 use Illuminate\Http\Response as HttpResponse;
-use App\Models\Project;
+use App\Providers\MoveInterface;
 
-class GameFacade
+class GameFacade implements MoveInterface
 {
 
-    public static function movePlayer()
-    {
+    public static function makeMove($boardState, $playerUnit = 'X') {
 
     }
 
