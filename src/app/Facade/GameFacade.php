@@ -8,8 +8,8 @@ use App\Providers\MoveInterface;
 class GameFacade implements MoveInterface
 {
 
-    public static function makeMove($boardState, $playerUnit = 'X') {
-
+    public function makeMove($boardState, $playerUnit = 'X') {
+    	return [];
     }
 
 }

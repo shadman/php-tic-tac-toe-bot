@@ -11,7 +11,8 @@ class GameValidator
     public static function move($parameters)
     {
         $rules =  array(
-            'name'    => 'required|max:50'
+            'boardState'    => 'required|array|min:3',
+            'playerUnit'    => 'required|string|max:1'
         );
         
         return Validator::make($parameters, $rules);

@@ -19,10 +19,11 @@ class GameController extends Controller
     public function play(Request $request){
 
         $parameters = $request->json()->all();
-
+        
         $validator = GameValidator::move($parameters);
         if (!$validator->fails()) {
-            return GameFacade::makeMove($boardState, $playerUnit);
+            $gameFacade = new GameFacade;
+            return $gameFacade->makeMove($parameters['boardState'], $parameters['playerUnit']);
         }
 
         // Bad Request response
