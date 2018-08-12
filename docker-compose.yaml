@@ -10,7 +10,7 @@ services:
     links:
       - mysql
     networks:
-      kibana:
+      tictactoe:
         ipv4_address: 172.21.0.6
   
   ### NGINX Container
@@ -25,14 +25,14 @@ services:
     links:
       - php-fpm
     networks:
-      kibana:
+      tictactoe:
         ipv4_address: 172.21.0.2
 
   ### Application Code Container
   application:
     build: ./build/application
     networks:
-      kibana:
+      tictactoe:
         ipv4_address: 172.21.0.4
 
   ### Workspace Utilities Container
@@ -44,14 +44,14 @@ services:
       - mysql
     tty: true
     networks:
-      kibana:
+      tictactoe:
         ipv4_address: 172.21.0.5
 
 volumes:
   src:
 
 networks:
-  kibana:
+  tictactoe:
     driver: bridge
     ipam:
       config:
