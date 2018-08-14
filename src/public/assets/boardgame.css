@@ -1,0 +1,31 @@
+
+body, html{
+	text-align: center;
+	margin-top: 50px; 
+}
+
+#board{
+	margin-top:50px;
+}
+
+.box {
+	background-color: #F2F3FF;
+	border:none;
+	border: 1px solid #f90000;
+	padding: 10px;
+	text-align: center;
+	font-size: 30px ;
+	color: red;
+	font-weight: bold;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	outline: none;
+	color: transparent;
+	text-shadow: 0 0 0 #1074c5;
+
+  &:focus {
+      outline: none;
+  }
+
+}
