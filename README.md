@@ -67,7 +67,7 @@ Response:
 3
 ```
 
-### To get matrix size for game
+### To take move and get bot move
 
 Request URL: http://127.0.0.1:81/v1/move [POST]
 
