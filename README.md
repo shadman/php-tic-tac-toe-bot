@@ -21,14 +21,14 @@
 
 #### Build your application
 
-> $ sudo docker-compose up -d --build
+> sudo docker-compose up -d --build
 
 Note: Give 5-10 minutes to setup your environment
 
 
 #### Verify all containers (optional to verify)
 
-> $ sudo docker ps
+> sudo docker ps
 
 #### Verify Game
 
@@ -93,40 +93,40 @@ Response:
 
 In this example, we are going to view a list of all containers then access workspace to see php
 
-> $ sudo docker ps
+> sudo docker ps
 
 
 #### Workspace Container
-> $ sudo docker exec -i -t tic_tac_toe_workspace_1 /bin/bash
+> sudo docker exec -i -t tic_tac_toe_workspace_1 /bin/bash
 
 
 ### Remove any specific container
 
 #### Stopping all containers:
-> $ sudo docker kill $(sudo docker ps -q)
+> sudo docker kill $(sudo docker ps -q)
 or
-> $ sudo docker kill tic_tac_toe_workspace_1
+> sudo docker kill tic_tac_toe_workspace_1
 
 #### Removing containers:
-> $ sudo docker rm -f tic_tac_toe_workspace_1
+> sudo docker rm -f tic_tac_toe_workspace_1
 or 
-> $ sudo docker rm $(sudo docker ps -a -q) #all
+> sudo docker rm $(sudo docker ps -a -q) #all
 
 #### Removing all docker images
-> $ sudo docker rmi $(sudo docker images -q)
+> sudo docker rmi $(sudo docker images -q)
 or
-> $ sudo docker rmi -f $(sudo docker images -q)
+> sudo docker rmi -f $(sudo docker images -q)
 
 
 ### Install Docker Composer (if not exists)
 
-> $ sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+> sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
-> $ sudo chmod +x /usr/bin/docker-compose
+> sudo chmod +x /usr/bin/docker-compose
 
-> $ systemctl start docker
+> systemctl start docker
 
-> $ systemctl status docker
+> systemctl status docker
 
 
 Cheers !
