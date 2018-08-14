@@ -29,3 +29,8 @@ body, html{
   }
 
 }
+
+#message {
+	color: red;
+	font-size:25px;
+}

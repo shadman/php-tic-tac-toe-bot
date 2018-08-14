@@ -12,5 +12,6 @@
 	<form id="boardgame">
 		<div id="board"></div>
 	</form>
+	<div id="message"></div>
 </body>
 </html>

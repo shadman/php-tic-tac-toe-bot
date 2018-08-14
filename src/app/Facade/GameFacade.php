@@ -100,41 +100,60 @@ class GameFacade implements MoveInterface
 
     		$player = [$this->players[0] => 0, $this->players[1] => 0];
     		foreach($patterns as $pattern) {
+
+                //counting how much occupied by each user to get wining or defense coordinates
     			if ( $boardState[$pattern[0]][$pattern[1]] == $this->players[0] ) $player[$this->players[0]]++;
     			else if ( $boardState[$pattern[0]][$pattern[1]] == $this->players[1] ) $player[$this->players[1]]++;
     			else if ( !in_array([$pattern[0],$pattern[1]], $availableTurnOptions) ) 
-    				$availableTurnOptions[] = [$pattern[0],$pattern[1]];
+    				                                    $availableTurnOptions[] = [$pattern[0],$pattern[1]];
 
     			// to set empty place to get win accurately
     			if ($boardState[$pattern[0]][$pattern[1]] == "") $lastEmpty = [$pattern[0],$pattern[1]];
     		}
 
-    		// checking bot reserved block, if equals to 2 then should place last one to win
-    		if ( $player[$this->players[1]] == $matrix-1 && $player[$this->players[0]] == 0 ) {
-
-    			// getting last empty option to set to win, if already placed 2 
-    			$botCoordinates = $this->generateCoordinatesResponse($lastEmpty[0], 
-    																 $lastEmpty[1], 
-    																 $this->players[1], 
-    																 "Player ".$this->players[1]." Won!");
+    		// checking bot moves, if got max then should place last one to win            
+    		if ( $player[$this->players[1]] == $matrix-1 && $player[$this->players[0]] == 0)  {
+    			// getting last empty option to set to win, if already placed others 
+    			$botCoordinates = $this->generateCoordinatesResponse($lastEmpty[0],  $lastEmpty[1], 
+    																 $this->players[1], "Player ".$this->players[1]." Won!");
     			$tookPlace = true;
     			break;
-    		}
+    		} else if ($player[$this->players[0]] == $matrix-1 && $player[$this->players[1]] == 0) {
+                // if found any place where oponent can place to win, hold that position to move if bot is not wining
+                $defenseCoordinates = [$lastEmpty[0], $lastEmpty[1]];
+            } 
+
+            if ($tookPlace == true) break;
     	}
 
     	// If did not placed any turn, getting available places to make a move for bot
     	if ($tookPlace==false) {
-    		$totalAvailablePlaces = count($availableTurnOptions)-1;
-    		$place = rand(0, $totalAvailablePlaces);
-
-    		$botCoordinates = $this->generateCoordinatesResponse($availableTurnOptions[$place][0], 
-    															 $availableTurnOptions[$place][1], 
-												    			 $this->players[1]);
-    	} 
-
+            if ( isset($defenseCoordinates) ) {
+                $botCoordinates = $this->generateCoordinatesResponse($defenseCoordinates[0], $defenseCoordinates[1], $this->players[1]);
+            } else {
+                // if bot dont need to defense then can place a random move on available coordinates
+                $botCoordinates = $this->randomCoordinates($availableTurnOptions);
+            }
+    	}
     	return $botCoordinates;
     }
 
+
+    private function randomCoordinates($availableTurnOptions) {
+
+        // if bot dont need to defense then can place a random move on available coordinates
+        $totalAvailablePlaces = count($availableTurnOptions)-1;
+        $place = rand(0, $totalAvailablePlaces);
+
+        if (count($availableTurnOptions) == 0) {
+          $botCoordinates = $this->generateCoordinatesResponse(null, null, $this->players[1], "Game Draw!");
+        } else {
+          $botCoordinates = $this->generateCoordinatesResponse($availableTurnOptions[$place][0], 
+                                                             $availableTurnOptions[$place][1], 
+                                                             $this->players[1]);
+        }
+        return $botCoordinates;
+    }
 
     private function generateCoordinatesResponse($x, $y, $playerUnit, $message='') {
 
