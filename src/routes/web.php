@@ -11,7 +11,7 @@
 |
 */
 
-$router->group(['prefix' => 'v2'], function () use ($router) {
+$router->group(['prefix' => 'v1'], function () use ($router) {
 
     # Matrix Size
     $router->get('/matrix', 'GameController@matrixSize');

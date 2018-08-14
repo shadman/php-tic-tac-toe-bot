@@ -3,7 +3,7 @@ $(document).ready(function () {
   // Function code here.
 
   	// Configuration
-	var url = 'http://127.0.0.1:81/v2';
+	var url = 'http://127.0.0.1:81/v1';
 	
 	// Board matrix, to hold all moves
 	var boardgame = [];

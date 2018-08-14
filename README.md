@@ -30,40 +30,46 @@ Note: Give 5-10 minutes to setup your environment
 
 > $ sudo docker ps
 
+#### Verify Game
 
-- Now you may verify web from browsers by using http://127.0.0.1:81/public/ link.
-- APIs will be deployed here http://127.0.0.1:81/v2/
+- Now you may verify web from browsers by using http://127.0.0.1:81/public/index.php link.
+- APIs will be deployed here http://127.0.0.1:81/v1/
 - If you wants to deploy API separetely, you just need to update the API URL inside src/public/assets/boardgame.js (Line 6)
 
 
 
 ### Option 2 Simple (without containers)
 
-#### Requirements:
+#### Prerequisites
+
 - PHP >= 7.1
 - Nginx / Apache
 
-#### Steps
+
+#### Steps to Setup
+
 - Copy complete project directory in your apache directory. ex: /var/www/html/php-tic-tac-toe-bot
-- Your API URL will become like: http://localhost/php-tic-tac-toe-bot/src/v2
-> You may test by using simple GET API call http://localhost/php-tic-tac-toe-bot/src/v2/matrix
+- Your API URL will become like: http://localhost/php-tic-tac-toe-bot/src/v1
+> You may test by using simple GET API call http://localhost/php-tic-tac-toe-bot/src/v1/matrix
 - Update API URL inside web js file. ex: src/public/assets/boardgame.js (Line 6)
-- Now you are ready to test your web by opening http://localhost/php-tic-tac-toe-bot/src/public/
+- Now you are ready to test your web by opening http://localhost/php-tic-tac-toe-bot/src/public/index.php
 
 
---
+
 ## API Documentation
 
 ### To get matrix size for game
 
-Request URL: http://127.0.0.1:81/v2/matrix [GET]
+Request URL: http://127.0.0.1:81/v1/matrix [GET]
 
 Response: 
-```3```
+```
+3
+```
 
 ### To get matrix size for game
 
-Request URL: http://127.0.0.1:81/v2/move [POST]
+Request URL: http://127.0.0.1:81/v1/move [POST]
 
 Request Body:
 ```
@@ -78,7 +84,7 @@ Response:
 [1,1,"O"]
 ```
 
---
+
 
 ## Other Required Stuff For Docker:
 
