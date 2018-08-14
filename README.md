@@ -50,6 +50,34 @@ Note: Give 5-10 minutes to setup your environment
 - Update API URL inside web js file. ex: src/public/assets/boardgame.js (Line 6)
 - Now you are ready to test your web by opening http://localhost/php-tic-tac-toe-bot/src/public/
 
+
+--
+## API Documentation
+
+### To get matrix size for game
+
+Request URL: http://127.0.0.1:81/v2/matrix [GET]
+
+Response: 
+```3```
+
+### To get matrix size for game
+
+Request URL: http://127.0.0.1:81/v2/move [POST]
+
+Request Body:
+```
+{
+  "boardState":[["O","","X"],["","","O"],["","X",""]],
+  "playerUnit": "X"
+}
+```
+
+Response:
+```
+[1,1,"O"]
+```
+
 --
 
 ## Other Required Stuff For Docker:
