@@ -11,10 +11,10 @@ class GameController extends Controller
 {
 
     /**
-     * Create project
+     * Play a game by posting moves
      * 
-     * @param  \App\Models\Project $request 
-     * @return json
+     * @param  $request 
+     * @return array
      */
     public function play(Request $request){
 
@@ -29,6 +29,21 @@ class GameController extends Controller
         // Bad Request response
         return response()->json('Input validation failed', HttpResponse::HTTP_BAD_REQUEST);
         
+    }
+
+    
+
+    /**
+     * Get a matriz size to draw a board
+     * 
+     * @param  $request 
+     * @return integer
+     */
+    public function matrixSize(Request $request) {
+
+        // return max size of defined game matrix
+        return response()->json(config('app.matrix'), HttpResponse::HTTP_OK);
+
     }
 
 }

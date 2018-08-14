@@ -13,6 +13,9 @@
 
 $router->group(['prefix' => 'v2'], function () use ($router) {
 
+    # Matrix Size
+    $router->get('/matrix', 'GameController@matrixSize');
+
     # Game
     $router->post('/move', 'GameController@play');
 
