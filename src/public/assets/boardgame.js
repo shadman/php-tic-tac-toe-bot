@@ -2,16 +2,22 @@
 $(document).ready(function () {
   // Function code here.
 
-	var url = 'http://localhost/challenge/php-tic-tac-toe-bot/src/v2';
+  	// Configuration
+	var url = 'http://127.0.0.1:81/v2';
+	
+	// Board matrix, to hold all moves
 	var boardgame = [];
 
 
+	/*
+	* Getting matrix size from tic tac toe API, to make things fully dynamic
+	* As all business logics are present in services
+	*/
 	$.get(url+"/matrix", function(matrixSize){
 		var rows = [];
 		for(var row=0; row<matrixSize; row++){
 			cols = [];
 			for(var col=0; col<matrixSize; col++){
-				//var inputbox = $('<input/>').attr({ type: 'text', id:"box["+row+"]["+col+"]", value:'', class: 'box'});
 				var inputbox = $('<input/>').attr({ type: 'text', id:row+","+col, value:'', class: 'box'});
 				$("#board").append(inputbox);
 				cols.push('');
@@ -27,28 +33,21 @@ $(document).ready(function () {
 	});
 
 
+	/*
+	* On clicking boxes, this function will be called to send moves to the server
+	* and getting bot move from the server 
+	*/
 	$(document).on('click', 'input', function(){ 
 		
-		// placing player move on desired position
+		// Placing player move on desired position
 		$(this).val('X').attr({ disabled: true});
-		//$('input').attr({ disabled: true});
 
-		// updating board matrix to send 
+		// Updating board matrix to send 
 		var coordinates = ($(this).attr('id')).split(',');
 		boardgame[coordinates[0]][coordinates[1]] = 'X';
 
-		//post data to api
-		/*
-		$.post( url+'/move', JSON.stringify({'boardState' : boardgame, 'playerUnit' : 'X'}) ).done(function( data ) {
-			console.log( "Data Loaded: " + data[0] );
 
-			//render response 
-			$("input[id='"+data[0]+","+data[1]+"'").val('O');
-			$('input').attr({ disabled: false});
-
-		});
-		*/
-
+		// Posting move to the API and getting bot move
 		$.ajax({
 			url: url+'/move',
 			method: 'POST',
@@ -59,7 +58,7 @@ $(document).ready(function () {
 
 				if (data[0]!=null && data[1]!=null ) {
 					$("input[id='"+data[0]+","+data[1]+"'").val(data[2]).attr({ disabled: true });
-					boardgame[data[0]][data[1]] = 'O';
+					boardgame[data[0]][data[1]] = data[2];
 				} 
 
 					if (xhr.status===201) { 
@@ -72,23 +71,7 @@ $(document).ready(function () {
 				alert("Something went wrong or API not working - Error:" + xhr.status); 
 			}
 		});
-
-		/*$.ajax({
-			type: "POST",
-			url: url+'/move',
-			data: boardgame,
-			success: success,
-			dataType: dataType
-		});*/
-
-		//postdata here
-
-		//console.log(response);
-
-		//console.log($('form#boardgame').serializeArray());
-		//alert($(this).attr('name'));
 		
 	});
-
 
 });

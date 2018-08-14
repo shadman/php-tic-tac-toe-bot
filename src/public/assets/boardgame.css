@@ -4,8 +4,13 @@ body, html{
 	margin-top: 50px; 
 }
 
-#board{
+.board{
 	margin-top:50px;
+}
+
+.message {
+	color: red;
+	font-size:25px;
 }
 
 .box {
@@ -30,7 +35,8 @@ body, html{
 
 }
 
-#message {
-	color: red;
-	font-size:25px;
+.note-message{
+	margin-top: 30px;
+	color: #2fc72f;
+	font-size:20px;
 }

@@ -10,8 +10,11 @@
 <body>
 	<h1>Tic Tac Toe with Bot</h1>
 	<form id="boardgame">
-		<div id="board"></div>
+		<div id="board" class="board"></div>
 	</form>
-	<div id="message"></div>
+	<div id="message" class="message"></div>
+	<div class="note-message">
+	Note: <b>X</b>: Your Player and <b>O</b>: Bot Player
+	</div>
 </body>
 </html>
