@@ -7,11 +7,9 @@ services:
       - ./src:/var/www
     expose:
       - "9000"
-    links:
-      - mysql
     networks:
       tictactoe:
-        ipv4_address: 172.21.0.6
+        ipv4_address: 172.22.0.6
   
   ### NGINX Container
   nginx:
@@ -26,26 +24,24 @@ services:
       - php-fpm
     networks:
       tictactoe:
-        ipv4_address: 172.21.0.2
+        ipv4_address: 172.22.0.2
 
   ### Application Code Container
   application:
     build: ./build/application
     networks:
       tictactoe:
-        ipv4_address: 172.21.0.4
+        ipv4_address: 172.22.0.4
 
   ### Workspace Utilities Container
   workspace:
     build: ./build/workspace
     volumes:
       - ./src:/var/www
-    links:
-      - mysql
     tty: true
     networks:
       tictactoe:
-        ipv4_address: 172.21.0.5
+        ipv4_address: 172.22.0.5
 
 volumes:
   src:
@@ -55,4 +51,4 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.21.0.0/16
+        - subnet: 172.22.0.0/16
