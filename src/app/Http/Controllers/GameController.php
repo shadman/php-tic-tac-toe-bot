@@ -9,13 +9,27 @@ use App\Validators\GameValidator;
 
 class GameController extends Controller 
 {
-
+    
     /**
-     * Play a game by posting moves
-     * 
-     * @param  $request 
+     * @api {POST} /v1/move Make a Move
+     * @apiVersion 1.0.0
+     * @apiName Make a Move
+     * @apiGroup Game
+     * @apiHeader {String} Content-Type application/json
+     *
+     * @apiParamExample {json} Request-Example:
+     * {
+     *   "boardState" : [["O","","X"],["","","O"],["","X",""]],
+     *   "playerUnit" : "X"
+     * }
+     * @apiSuccessExample {json} Success-Response:
+     * HTTP/1.1 200 OK
+     *  
+     * [1,0,"O"]
+     *
      * @return array
      */
+
     public function play(Request $request){
 
         $parameters = $request->json()->all();
@@ -34,9 +48,15 @@ class GameController extends Controller
     
 
     /**
-     * Get a matriz size to draw a board
-     * 
-     * @param  $request 
+     * @api {GET} /v1/matrix Matrix Size
+     * @apiVersion 1.0.0
+     * @apiName Matrix Size
+     * @apiGroup Game
+     * @apiHeader {String} Content-Type application/json
+     *
+     * @apiSuccessExample {json} Success-Response:
+     * HTTP/1.1 200 OK
+     *  
      * @return integer
      */
     public function matrixSize(Request $request) {
